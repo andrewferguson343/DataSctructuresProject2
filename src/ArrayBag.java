@@ -62,13 +62,22 @@ public final class ArrayBag<T> implements BagInterface<T>{
 		T buffer  = bag[numberOfEntries - 1];
 		bag[numberOfEntries - 1] = null;
 		numberOfEntries--;
-		return buffer;
-		
+		return buffer;		
 	}
 
 	@Override
 	public boolean remove(T anEntry) {
 		// TODO Auto-generated method stub
+		for (int i = 0;i < numberOfEntries; i++) {
+			if(anEntry == bag[i])
+			{
+				bag[i] = bag[numberOfEntries -1];
+				bag[numberOfEntries-1] = null;
+				numberOfEntries--;
+				return true;
+			}
+			
+		}
 		return false;
 	}
 
@@ -81,25 +90,22 @@ public final class ArrayBag<T> implements BagInterface<T>{
 	@Override
 	public int getFrequencyOf(T anEntry) {
 		// TODO Auto-generated method stub
-		if(isEmpty()) {
-			return 0;
-		}
+		int count = 0;
+		for(int i = 0; i <= numberOfEntries-1) {
+			if(bag[i] == anEntry) {
+				count++;
+			}				
+		}		
+		return count;
+		
 	}
 	
 
 	@Override
 	public boolean contains(T anEntry) {
 		// TODO Auto-generated method stub
-		if(isEmpty()) {
-			return false;
-		}
-		for(int i = 0; i < bag.length; i++) {
-			if(bag[i] == anEntry)
-			{
-				return true;
-			}
-		}
-		return false;
+		
+		return getFrequencyOf(anEntry) > 0;
 	}
 
 	@Override
