@@ -42,15 +42,14 @@ public final class ArrayBag<T> implements BagInterface<T>{
 
 	@Override
 	public boolean add(T newEntry) {
-		boolean errorFlag = true;		
+			
 		if(numberOfEntries < bag.length){
 			bag[numberOfEntries] = newEntry;
 			numberOfEntries++;
-		}
-		else {
-			errorFlag = false;
+			return true;
 		}		
-		return errorFlag;
+				
+		return false;
 	}
 
 	@Override
@@ -83,15 +82,20 @@ public final class ArrayBag<T> implements BagInterface<T>{
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		if(!isEmpty()) {
+			for (int i = 0; i < bag.length; i++)
+			{
+				bag[i] = null;
+				numberOfEntries = 0;
+			}
+		}
 	}
 
 	@Override
 	public int getFrequencyOf(T anEntry) {
 		// TODO Auto-generated method stub
 		int count = 0;
-		for(int i = 0; i <= numberOfEntries-1) {
+		for(int i = 0; i <= numberOfEntries-1; i++) {
 			if(bag[i] == anEntry) {
 				count++;
 			}				
