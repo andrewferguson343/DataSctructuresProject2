@@ -66,17 +66,21 @@ public final class ArrayBag<T> implements BagInterface<T>{
 
 	@Override
 	public boolean remove(T anEntry) {
-		// TODO Auto-generated method stub
-		for (int i = 0;i < numberOfEntries; i++) {
-			if(anEntry == bag[i])
-			{
+		if(isEmpty() || contains(anEntry) == false){
+			return false;
+		}		
+		for (int i = 0; i < numberOfEntries; i++) {
+			if(anEntry == bag[i]){
 				bag[i] = bag[numberOfEntries -1];
 				bag[numberOfEntries-1] = null;
-				numberOfEntries--;
-				return true;
-			}
-			
+				numberOfEntries--;				
+			}					
+		}		
+		if(contains(anEntry) == true)
+		{
+			return remove(anEntry);
 		}
+		
 		return false;
 	}
 
